@@ -33,3 +33,16 @@ A prévia está configurada com `noindex, nofollow`. Antes de publicar: revisar 
 ## Testes no navegador
 
 Execute `npm run test:e2e`. A suíte cobre desktop 1440px, mobile 390px e 360px, navegação interna, menu, Escape e foco na galeria, destinos do WhatsApp, arquivos de imagem e movimento reduzido. Usa Chromium de sistema quando disponível; em outra máquina, instale com `npx playwright install chromium` ou defina `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
+
+## Publicação na Vercel
+
+Importe `011bigodeee-eng/Vossbarber` e configure:
+
+- Production Branch: `main`.
+- Root Directory: raiz do repositório (campo vazio ou `.`), pois `package.json` e `src` estão na raiz. Não use `/workspace/Vossbarber`, que é apenas o caminho da máquina de desenvolvimento.
+- Framework Preset: Next.js (também declarado em `vercel.json`).
+- Install Command: `npm ci`.
+- Build Command: `npm run build`.
+- Output Directory: padrão do Next.js, `.next`; não use `public` ou `out`.
+
+Após alterar as configurações, execute um novo deployment da `main` e confirme que o domínio está atribuído a esse deployment de produção. Um push ao GitHub só publica automaticamente se a integração com a Vercel estiver conectada. Para um 404 da plataforma, confira primeiro o domínio, o deployment de produção e os logs no painel; um build local aprovado não confirma a publicação remota.
